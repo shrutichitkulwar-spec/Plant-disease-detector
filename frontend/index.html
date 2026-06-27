@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PlantAI — Plant Disease Detector</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+
+  <!-- Ambient blobs -->
+  <div class="bg-blob blob1"></div>
+  <div class="bg-blob blob2"></div>
+  <div class="bg-blob blob3"></div>
+
+  <!-- Dot grid -->
+  <div class="dot-grid" aria-hidden="true"></div>
+
+  <!-- Floating doodles -->
+  <div class="doodles" aria-hidden="true">
+
+    <!-- Big leaf top-left -->
+    <svg class="doodle d1" viewBox="0 0 70 80" fill="none">
+      <path d="M35 5 C62 5 68 40 35 75 C2 40 8 5 35 5Z" stroke="#4ade80" stroke-width="1.4" fill="none"/>
+      <line x1="35" y1="5" x2="35" y2="75" stroke="#4ade80" stroke-width="0.9" stroke-dasharray="3 4"/>
+      <line x1="35" y1="22" x2="50" y2="34" stroke="#4ade80" stroke-width="0.9"/>
+      <line x1="35" y1="35" x2="20" y2="45" stroke="#4ade80" stroke-width="0.9"/>
+      <line x1="35" y1="48" x2="48" y2="57" stroke="#4ade80" stroke-width="0.9"/>
+      <line x1="35" y1="58" x2="22" y2="65" stroke="#4ade80" stroke-width="0.9"/>
+    </svg>
+
+    <!-- Sprout left-mid -->
+    <svg class="doodle d2" viewBox="0 0 60 90" fill="none">
+      <line x1="30" y1="85" x2="30" y2="30" stroke="#22c55e" stroke-width="1.4" stroke-linecap="round"/>
+      <path d="M30 50 C30 50 10 38 12 18 C22 20 34 34 30 50Z" stroke="#22c55e" stroke-width="1.4" fill="none"/>
+      <path d="M30 38 C30 38 50 28 48 8 C38 10 26 24 30 38Z" stroke="#22c55e" stroke-width="1.4" fill="none"/>
+      <circle cx="30" cy="85" r="3" stroke="#22c55e" stroke-width="1.2"/>
+    </svg>
+
+    <!-- Flower top-right -->
+    <svg class="doodle d3" viewBox="0 0 80 80" fill="none">
+      <circle cx="40" cy="40" r="7" stroke="#4ade80" stroke-width="1.4"/>
+      <ellipse cx="40" cy="20" rx="6" ry="11" stroke="#4ade80" stroke-width="1.2"/>
+      <ellipse cx="40" cy="60" rx="6" ry="11" stroke="#4ade80" stroke-width="1.2"/>
+      <ellipse cx="20" cy="40" rx="11" ry="6" stroke="#4ade80" stroke-width="1.2"/>
+      <ellipse cx="60" cy="40" rx="11" ry="6" stroke="#4ade80" stroke-width="1.2"/>
+      <ellipse cx="24" cy="24" rx="6" ry="10" transform="rotate(45 24 24)" stroke="#86efac" stroke-width="1"/>
+      <ellipse cx="56" cy="56" rx="6" ry="10" transform="rotate(45 56 56)" stroke="#86efac" stroke-width="1"/>
+      <ellipse cx="56" cy="24" rx="6" ry="10" transform="rotate(-45 56 24)" stroke="#86efac" stroke-width="1"/>
+      <ellipse cx="24" cy="56" rx="6" ry="10" transform="rotate(-45 24 56)" stroke="#86efac" stroke-width="1"/>
+    </svg>
+
+    <!-- Vine right -->
+    <svg class="doodle d4" viewBox="0 0 70 140" fill="none">
+      <path d="M35 135 C35 100 15 88 25 65 C35 42 55 42 45 18 C40 8 30 5 35 2" stroke="#22c55e" stroke-width="1.4" stroke-linecap="round"/>
+      <path d="M28 100 C28 100 6 88 4 70" stroke="#22c55e" stroke-width="1"/>
+      <path d="M33 75 C33 75 55 68 58 50" stroke="#22c55e" stroke-width="1"/>
+      <path d="M38 50 C38 50 18 42 16 26" stroke="#22c55e" stroke-width="1"/>
+      <ellipse cx="4" cy="67" rx="9" ry="6" transform="rotate(-20 4 67)" stroke="#4ade80" stroke-width="1.2"/>
+      <ellipse cx="60" cy="47" rx="9" ry="6" transform="rotate(20 60 47)" stroke="#4ade80" stroke-width="1.2"/>
+      <ellipse cx="14" cy="23" rx="9" ry="6" transform="rotate(-15 14 23)" stroke="#4ade80" stroke-width="1.2"/>
+    </svg>
+
+    <!-- Mushroom bottom-left -->
+    <svg class="doodle d5" viewBox="0 0 60 70" fill="none">
+      <rect x="24" y="40" width="12" height="22" rx="3" stroke="#86efac" stroke-width="1.2"/>
+      <path d="M8 42 C8 20 52 20 52 42Z" stroke="#4ade80" stroke-width="1.4" fill="none"/>
+      <circle cx="22" cy="34" r="4" stroke="#86efac" stroke-width="1"/>
+      <circle cx="38" cy="30" r="3" stroke="#86efac" stroke-width="1"/>
+      <circle cx="30" cy="38" r="2.5" stroke="#86efac" stroke-width="1"/>
+    </svg>
+
+    <!-- Wheat stalk bottom-right -->
+    <svg class="doodle d6" viewBox="0 0 50 100" fill="none">
+      <line x1="25" y1="95" x2="25" y2="10" stroke="#22c55e" stroke-width="1.4" stroke-linecap="round"/>
+      <ellipse cx="25" cy="10" rx="5" ry="10" stroke="#4ade80" stroke-width="1.2"/>
+      <ellipse cx="25" cy="28" rx="4" ry="8" transform="rotate(25 25 28)" stroke="#4ade80" stroke-width="1"/>
+      <ellipse cx="25" cy="28" rx="4" ry="8" transform="rotate(-25 25 28)" stroke="#4ade80" stroke-width="1"/>
+      <ellipse cx="25" cy="44" rx="4" ry="8" transform="rotate(25 25 44)" stroke="#86efac" stroke-width="1"/>
+      <ellipse cx="25" cy="44" rx="4" ry="8" transform="rotate(-25 25 44)" stroke="#86efac" stroke-width="1"/>
+      <ellipse cx="25" cy="58" rx="3" ry="7" transform="rotate(25 25 58)" stroke="#86efac" stroke-width="0.9"/>
+      <ellipse cx="25" cy="58" rx="3" ry="7" transform="rotate(-25 25 58)" stroke="#86efac" stroke-width="0.9"/>
+    </svg>
+
+    <!-- DNA helix center-right -->
+    <svg class="doodle d7" viewBox="0 0 50 110" fill="none">
+      <path d="M10 5 C40 20 40 35 10 50 C40 65 40 80 10 95" stroke="#4ade80" stroke-width="1.3" fill="none"/>
+      <path d="M40 5 C10 20 10 35 40 50 C10 65 10 80 40 95" stroke="#22c55e" stroke-width="1.3" fill="none"/>
+      <line x1="10" y1="27" x2="40" y2="27" stroke="#86efac" stroke-width="0.8"/>
+      <line x1="25" y1="50" x2="25" y2="50" stroke="#86efac" stroke-width="0.8"/>
+      <line x1="10" y1="73" x2="40" y2="73" stroke="#86efac" stroke-width="0.8"/>
+      <circle cx="10" cy="27" r="2.5" fill="#4ade80"/>
+      <circle cx="40" cy="27" r="2.5" fill="#22c55e"/>
+      <circle cx="10" cy="73" r="2.5" fill="#4ade80"/>
+      <circle cx="40" cy="73" r="2.5" fill="#22c55e"/>
+    </svg>
+
+    <!-- Water drops top-center -->
+    <svg class="doodle d8" viewBox="0 0 80 50" fill="none">
+      <path d="M15 40 C15 28 5 22 5 15 C5 8 10 5 15 5 C20 5 25 8 25 15 C25 22 15 28 15 40Z" stroke="#4ade80" stroke-width="1.2"/>
+      <path d="M45 35 C45 26 37 21 37 15 C37 9 41 7 45 7 C49 7 53 9 53 15 C53 21 45 26 45 35Z" stroke="#22c55e" stroke-width="1.2"/>
+      <path d="M70 30 C70 23 64 19 64 14 C64 9 67 7 70 7 C73 7 76 9 76 14 C76 19 70 23 70 30Z" stroke="#86efac" stroke-width="1"/>
+    </svg>
+
+    <!-- Sparkle star top -->
+    <svg class="doodle d9" viewBox="0 0 50 50" fill="none">
+      <line x1="25" y1="4" x2="25" y2="46" stroke="#4ade80" stroke-width="1.2" stroke-linecap="round"/>
+      <line x1="4" y1="25" x2="46" y2="25" stroke="#4ade80" stroke-width="1.2" stroke-linecap="round"/>
+      <line x1="10" y1="10" x2="40" y2="40" stroke="#86efac" stroke-width="0.9" stroke-linecap="round"/>
+      <line x1="40" y1="10" x2="10" y2="40" stroke="#86efac" stroke-width="0.9" stroke-linecap="round"/>
+      <circle cx="25" cy="25" r="3" stroke="#4ade80" stroke-width="1.2"/>
+    </svg>
+
+    <!-- Small leaf mid-right -->
+    <svg class="doodle d10" viewBox="0 0 44 50" fill="none">
+      <path d="M22 4 C38 4 42 22 22 46 C2 22 6 4 22 4Z" stroke="#86efac" stroke-width="1.2"/>
+      <line x1="22" y1="4" x2="22" y2="46" stroke="#86efac" stroke-width="0.8" stroke-dasharray="2 3"/>
+      <line x1="22" y1="18" x2="32" y2="26" stroke="#86efac" stroke-width="0.8"/>
+      <line x1="22" y1="30" x2="12" y2="37" stroke="#86efac" stroke-width="0.8"/>
+    </svg>
+
+    <!-- Dotted orbit -->
+    <svg class="doodle d11" viewBox="0 0 70 70" fill="none">
+      <circle cx="35" cy="35" r="28" stroke="#22c55e" stroke-width="0.9" stroke-dasharray="4 6"/>
+      <circle cx="35" cy="35" r="5" stroke="#4ade80" stroke-width="1.2"/>
+      <circle cx="35" cy="7" r="3" fill="#4ade80" opacity="0.7"/>
+      <circle cx="63" cy="35" r="2" fill="#22c55e" opacity="0.7"/>
+      <circle cx="35" cy="63" r="3" fill="#4ade80" opacity="0.7"/>
+    </svg>
+
+    <!-- Seed/bean -->
+    <svg class="doodle d12" viewBox="0 0 40 55" fill="none">
+      <path d="M20 5 C35 5 38 28 20 50 C8 38 6 18 20 5Z" stroke="#86efac" stroke-width="1.2"/>
+      <path d="M20 15 C28 20 30 35 20 45" stroke="#4ade80" stroke-width="0.9" stroke-dasharray="2 3"/>
+    </svg>
+
+  </div>
+
+  <header>
+    <div class="logo">
+      <span class="logo-leaf">🌿</span>
+      <span class="logo-text">PlantAI</span>
+    </div>
+    <span class="badge">YOLOv8 · Live</span>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="hero-eyebrow">AI-Powered Diagnosis</p>
+      <h1>Detect plant<br/><em>disease instantly</em></h1>
+      <p class="hero-sub">Upload a photo of any leaf. Our model identifies diseases in seconds — trained on real field data.</p>
+      <div class="hero-tags">
+        <span class="tag">🌱 6 Disease Classes</span>
+        <span class="tag">⚡ Instant Results</span>
+        <span class="tag">🔬 YOLOv8 Model</span>
+      </div>
+    </section>
+
+    <div class="upload-card" id="uploadCard">
+      <div class="upload-zone" id="dropZone">
+        <input type="file" id="fileInput" accept="image/*" hidden />
+        <div class="upload-placeholder" id="placeholder">
+          <div class="upload-icon-wrap">
+            <div class="scan-line"></div>
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="17 8 12 3 7 8"/>
+              <line x1="12" y1="3" x2="12" y2="15"/>
+            </svg>
+          </div>
+          <p class="upload-label">Drop your leaf photo here</p>
+          <p class="upload-sub">or <span class="link-btn" id="browseBtn">choose a file</span></p>
+          <p class="upload-hint">JPG · PNG · WEBP &nbsp;·&nbsp; up to 15 MB</p>
+        </div>
+        <img id="preview" src="" alt="Preview" hidden />
+      </div>
+
+      <div class="actions">
+        <button id="analyzeBtn" disabled>
+          <span class="btn-glow"></span>
+          <span id="btnText">Analyze Leaf</span>
+          <span id="btnSpinner" class="spinner" hidden></span>
+        </button>
+        <button id="resetBtn" class="secondary" hidden>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.51"/></svg>
+          Reset
+        </button>
+      </div>
+    </div>
+
+    <!-- Result Card -->
+    <div class="result-card" id="resultCard" hidden>
+      <div class="result-top">
+        <div class="result-status">
+          <div class="status-dot"></div>
+          <span class="status-label">Analysis Complete</span>
+        </div>
+        <p class="result-eyebrow">Detected Condition</p>
+        <h2 id="diseaseName"></h2>
+        <div class="conf-label-row">
+          <span>Confidence</span>
+          <span id="confPercent" class="conf-value"></span>
+        </div>
+        <div class="bar-track">
+          <div class="bar-fill" id="confBar"></div>
+        </div>
+      </div>
+
+      <div class="result-bottom">
+        <p class="breakdown-title">All Detections</p>
+        <div id="allPredsList"></div>
+      </div>
+
+      <div class="disclaimer">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        For educational use only. Consult a certified agronomist for serious crop issues.
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="footer-leaves" aria-hidden="true">🌿 · 🌱 · 🍃 · 🌾 · 🍀</div>
+    <p>PlantAI &copy; 2024 &nbsp;·&nbsp; Powered by YOLOv8</p>
+  </footer>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>
